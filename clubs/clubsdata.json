@@ -1,0 +1,56 @@
+{
+    "clubs": [
+        {
+            "club_name": "Ivy2",
+            "club_address": "Longpipe road33",
+            "club_members": [
+                {
+                    "name": "Eric2",
+                    "age": "34",
+                    "member_id": 0
+                },
+                {
+                    "name": "Juana2",
+                    "age": "44",
+                    "member_id": 1
+                },
+                {
+                    "name": "Andrei2",
+                    "age": "22",
+                    "member_id": 2
+                }
+            ],
+            "expand": true,
+            "club_id": 0
+        },
+        {
+            "club_name": "Daisy2",
+            "club_address": "Bradford road",
+            "club_members": [
+                {
+                    "name": "Mike1",
+                    "age": 35,
+                    "member_id": 0
+                },
+                {
+                    "name": "Lucas1",
+                    "age": "50",
+                    "member_id": 1
+                },
+                {
+                    "name": "Fann1",
+                    "age": 39,
+                    "member_id": 2
+                }
+            ],
+            "expand": true,
+            "club_id": 1
+        },
+        {
+            "club_name": "BBC",
+            "club_address": "85 road",
+            "expand": false,
+            "club_id": 2
+        }
+    ]
+}

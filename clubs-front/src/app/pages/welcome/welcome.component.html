@@ -1,0 +1,55 @@
+<button nz-button (click)="saveAll()" nzType="primary">Save table</button>
+<br/>
+<br/>
+<nz-table #nestedTable [nzData]="clubsList" [nzPageSize]="10">
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let column of columnsList" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">{{ column.title }}</th>        
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let data of nestedTable.data">
+        <tr>
+          <ng-container *ngIf="!editCache[data.club_id].edit; else editTemplate">
+            <td [(nzExpand)]="data.expand" [nzShowExpand]="!!data.club_members"></td>            
+            <td>{{ data.club_name }}</td>
+            <td>{{ data.club_address}}</td>
+            <td><a (click)="startEdit(data.club_id)">Edit</a></td>
+          </ng-container>
+          <ng-template #editTemplate>
+              <td></td>
+              <td><input type="text" nz-input [(ngModel)]="editCache[data.club_id].item.club_name" /></td>              
+              <td><input type="text" nz-input [(ngModel)]="editCache[data.club_id].item.club_address" /></td>
+              <td>
+                <a (click)="saveEdit(data.club_id)" class="save">Save </a>
+                <a (click)="cancelEdit(data.club_id)">Cancel</a>
+              </td>
+          </ng-template>          
+        </tr>
+        <tr [nzExpand]="data.expand">
+            <nz-table #innerTable [nzData]="data.club_members" nzSize="middle" [nzShowPagination]="false">
+              <thead>
+                <tr>                  
+                  <th>Name</th>
+                  <th>Age</th>                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let subdata of innerTable.data">
+                  <ng-container *ngIf="!editCache[data.club_id].edit; else editMembersTemplate">  
+                    <td>{{ subdata.name }}</td>
+                    <td>{{ subdata.age }}</td>
+                  </ng-container>
+                  <ng-template #editMembersTemplate>
+                    <td><input type="text" nz-input [(ngModel)]="editCache[data.club_id].item.club_members[subdata.member_id].name" /></td>              
+                    <td><input type="text" nz-input [(ngModel)]="editCache[data.club_id].item.club_members[subdata.member_id].age" /></td>  
+                  </ng-template>                    
+                </tr>
+              </tbody>
+            </nz-table>
+        </tr>        
+      </ng-container>
+    </tbody>
+  </nz-table>
